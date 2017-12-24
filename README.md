@@ -1,5 +1,5 @@
 # Qui định đánh URL
-
+#đồ án web
 **url: index.php?a=_1_&id=_2_**
 
 * action:
