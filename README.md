@@ -1,4 +1,5 @@
 # Qui định đánh URL
+#lt web
 **url: index.php?a=_1_&id=_2_**
 
 * action:
