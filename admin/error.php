@@ -1,1 +1,0 @@
-<div class='alert alert-danger'>Bạn không được phép truy cập trang này.</div>

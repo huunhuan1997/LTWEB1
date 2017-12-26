@@ -1,1 +1,0 @@
-<div class='alert alert-danger'>Không tìm thấy trang được yêu cầu.</div>
