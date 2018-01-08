@@ -3,10 +3,9 @@
 
 <?php
 	$SoLuongLay = 8;
-	$query = "  SELECT sp.MaSanPham,sp.TenSanPham,sp.GiaSanPham,tg.TenTacGia,sp.HinhURL
-                from SanPham sp,tacgia tg
-                where sp.MaTacGia = tg.MaTacGia
-                and sp.BiXoa = FALSE
+	$query = "  SELECT sp.MaSanPham,sp.TenSanPham,sp.GiaSanPham,sp.TenTacGia,sp.HinhURL
+                from sanpham sp
+                where  sp.BiXoa = FALSE
                 ORDER BY NgayNhap desc 
                 LIMIT 0, $SoLuongLay";
     $list = Provider::execQuery($query);
