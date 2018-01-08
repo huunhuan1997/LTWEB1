@@ -14,6 +14,9 @@
         case 4:
             include ("pages/pChiTietSanPham.php");
             break;
+	case 5:
+            include ("pages/pKetQuaTimKiem.php");
+            break;
         case 6:
             include ("pages/pQuanLyGioHang.php");
             break;
