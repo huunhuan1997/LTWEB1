@@ -13,18 +13,25 @@
 		
 		</ul>
 		<form action="index.php" method="get" class="navbar-form navbar-right" id="searchBox">
-			
-			<input type="hidden" name="p" value="products">
+			<input type="hidden" name="a" value="5">
 			<div class="input-group">
-				<input type="search" name="name" id="keyword" placeholder="Tên sách" class="form-control">
+				<input type="search" name="TenSach" id="TuKhoa" placeholder="Tên sách" class="form-control">
 				<span class="input-group-btn">
-					<button type="button" class="btn btn-default" onclick="OpenAdvSearch();">Tuỳ chọn</button>
+					<button type="button" class="btn btn-default" onclick="TimKiemNangCao();">Tuỳ chọn</button>
       			</span>
 			</div>
 			<button type="submit" class="btn"><span class="glyphicon glyphicon-search"></span></button>
+		
 			<div id="advSearch">
-				<?php include_once("modules/advsearch.php"); ?>
+				<?php include('modules/mTimKiemNangCao.php') ?>
 			</div>
 		</form>
 	</div>
 </div>
+
+<script>
+function TimKiemNangCao()
+{
+    $("#advSearch").toggle('fast');
+}
+</script>
