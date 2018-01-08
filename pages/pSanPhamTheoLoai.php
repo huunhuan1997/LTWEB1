@@ -6,21 +6,31 @@
 <?php
     if(isset($_GET["id"]) == false)
         Provider::ChangeURL("index.php?a=0&id=1");
-	$query ="  SELECT sp.MaSanPham,sp.TenSanPham,sp.GiaSanPham,tg.TenTacGia,sp.HinhURL
-                from SanPham sp,TacGia tg
-                where sp.MaTacGia = tg.MaTacGia
-                and sp.BiXoa = FALSE and sp.MaLoaiSanPham =".$_GET["id"];
+	$query ="  SELECT sp.MaSanPham,sp.TenSanPham,sp.GiaSanPham,sp.TenTacGia,sp.HinhURL
+                from sanpham sp
+                where sp.BiXoa = FALSE 
+                      and sp.MaLoaiSanPham =".$_GET["id"];
     $list = Provider::execQuery($query);
+	$row = mysqli_fetch_array($list);
+    if(count($row) > 0)
+    {
+        $TenSanPham = $row["TenSanPham"];
+        $HinhURL = $row["HinhURL"];
+        $MaSanPham = $row["MaSanPham"];
+        $GiaSanPham = $row["GiaSanPham"];
+        $TenTacGia = $row["TenTacGia"];
 
-	if (count($list) > 0) {
-		while($row = mysqli_fetch_array($list)){
+        include("templates/HienThiDSSach.php");
+        while($row = mysqli_fetch_array($list))
+        {
             $TenSanPham = $row["TenSanPham"];
             $HinhURL = $row["HinhURL"];
             $MaSanPham = $row["MaSanPham"];
             $GiaSanPham = $row["GiaSanPham"];
             $TenTacGia = $row["TenTacGia"];
+
             include("templates/HienThiDSSach.php");
-		}
+        }
     }
     else
     {
