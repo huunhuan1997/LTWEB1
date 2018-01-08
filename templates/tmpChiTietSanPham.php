@@ -1,6 +1,6 @@
 <div class="clearfix" id="productDetail">
 	<div class="w40p thumbnail pull-left">
-		<img src="images/product/<?php echo $row['HinhURL']; ?>" alt="<?php echo $row['TenSanPham']; ?>">
+		<img src="images/Product/<?php echo $row['HinhURL']; ?>" alt="<?php echo $row['TenSanPham']; ?>">
 	</div>
 	<div class="w60p pull-right">
 		<ul>
@@ -16,8 +16,12 @@
 			if(isset($_SESSION["MaTaiKhoan"]))
 			{
 				?>
-					<button class="btn btn-danger" onclick="AddToCart(<?php echo $id . ", " . $row['SoLuongTon']; ?>);">Đặt vào giỏ hàng</button>
-					Số lượng: <input type="text" value="1" class="list-group-item" name="txtQuantity" id="txtQuantity">
+					<form action="index.php?a=12&id=<?php echo $id; ?>" method="post">
+						
+						<button type="Submit" class="btn btn-danger" onclick="return KiemTraSoLuongSach(<?php echo $row['SoLuongTon']; ?>);">Đặt vào giỏ hàng</button>
+						Số lượng: <input type="text" value="1" class="list-group-item" name="txtSoLuongNhap" id="txtSoLuongNhap">
+					</form>
+						
 				<?php
 			}
 			?>

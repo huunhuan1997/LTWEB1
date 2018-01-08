@@ -3,10 +3,9 @@
 if (isset($_GET['id'])) 
 {
 	$id = $_GET['id'];
-	$query ="   SELECT lsp.MaLoaiSanPham, sp.GiaSanPham, sp.SoLuongTon, sp.MoTa, sp.MaSanPham,sp.TenSanPham,sp.GiaSanPham,tg.TenTacGia,sp.HinhURL,hsx.TenHangSanXuat,lsp.TenLoaiSanPham
-                from SanPham sp,TacGia tg,hangsanxuat hsx,loaisanpham lsp
-                where sp.MaTacGia = tg.MaTacGia
-						and sp.MaLoaiSanPham = lsp.MaLoaiSanPham 
+	$query ="   SELECT lsp.MaLoaiSanPham, sp.GiaSanPham, sp.SoLuongTon, sp.MoTa, sp.MaSanPham,sp.TenSanPham,sp.GiaSanPham,sp.TenTacGia,sp.HinhURL,hsx.TenHangSanXuat,lsp.TenLoaiSanPham
+                from sanpham sp,hangsanxuat hsx,loaisanpham lsp
+                where 	 sp.MaLoaiSanPham = lsp.MaLoaiSanPham 
 						and sp.MaHangSanXuat = hsx.MaHangSanXuat
 						and  sp.MaSanPham = $id";
 	$list = Provider::execQuery($query);
@@ -20,13 +19,12 @@ if (isset($_GET['id']))
 	<h2 class="page-header">Sách cùng thể loại</h2>
 <?php
 		$MaLoai = $row["MaLoaiSanPham"];
-		$query = "  SELECT sp.MaSanPham,sp.TenSanPham,sp.GiaSanPham,tg.TenTacGia,sp.HinhURL
-					from SanPham sp,tacgia tg
-					where sp.MaTacGia = tg.MaTacGia
-					and sp.BiXoa = FALSE 
-					and sp.MaSanPham <> $id
-					and sp.MaLoaiSanPham = $MaLoai
-					LIMIT 0, 4";
+		$query = "  SELECT sp.MaSanPham,sp.TenSanPham,sp.GiaSanPham,sp.TenTacGia,sp.HinhURL
+					from sanpham sp
+					where sp.BiXoa = FALSE 
+							and sp.MaSanPham <> $id
+							and sp.MaLoaiSanPham = $MaLoai
+							LIMIT 0, 4";
 		$list = Provider::execQuery($query);
 		
 			if (count($list) > 0) {
