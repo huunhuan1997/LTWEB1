@@ -1,11 +1,32 @@
 <?php changeTitle("Giỏ hàng của tôi"); ?>
 
+<?php 
+	if (isset($_GET['check']) && $_GET['check'] == 1) 
+    {
+		$ThongBao = "đặt hàng thành công";
+?>
+    <div class='alert alert-success'><?php echo $ThongBao; ?></div>
+<?php
+    } 
+     else if (isset($_GET['check']) && $_GET['check'] == 0) 
+        {
+			$ThongBao = "không thể đặt hàng";
+?>
+    <div class='alert alert-danger'><?php echo $ThongBao; ?></div>
+<?php 
+		}
+?>
+<?php
+	if(isset($_SESSION["MaTaiKhoan"]))
+	{
+ ?>
 <table class="table table-striped" id="cartItems">
 	<tr class="nb">
+		<td>
+		</td>
 		<td></td>
-		<td></td>
-		<td><button class="btn btn-danger" onclick="window.location.href = 'libs/handling/addorder.php';">Đặt hàng</button></td>
-		<td><button class="btn btn-primary" onclick="window.location.href = 'libs/handling/dellallcartitems.php';">Hủy tất cả</button></td>
+		<td><button class="btn btn-danger" onclick="window.location.href = 'index.php?a=14';">Đặt hàng</button></td>
+		<td><button class="btn btn-primary" onclick="window.location.href = 'index.php?a=9';">Hủy tất cả</button></td>
 	</tr>
 	<tr>
 		<th>Sản phẩm</th>
@@ -14,25 +35,46 @@
 		<th></th>
 	</tr>
 	<?php
-		$userid = isset($cuser['id']) ? $cuser['id'] : "";
-		$query = "SELECT `product_id`, `quantity`, `created` from `cart_items` where `user_id` = $userid";
-		$items = Database::executeQuery($query);
-		foreach ($items as $item) {
-			$product = Product::getProduct($item['product_id']);
-			$quantity = $item['quantity'];
+		$TongTien = 0;
+            if(isset($_SESSION["gioHang"]))
+            {
+                $gioHang = unserialize($_SESSION["gioHang"]);
+				if(count($gioHang->listProduct) > 0)
+				{
+					foreach($gioHang->listProduct as $p)
+					{
+						$query ="   SELECT sp.SoLuongTon, sp.MaSanPham,sp.TenSanPham,sp.GiaSanPham,sp.TenTacGia,sp.HinhURL
+									from sanpham sp
+									where sp.BiXoa = FALSE and MaSanPham = $p->id";
+						$result = Provider::execQuery($query);
+						$row = mysqli_fetch_array($result);
+	
+						$TenSanPham = $row['TenSanPham'];
+						$MaSanPham = $p->id;
+						$HinhURL = $row['HinhURL'];
+						$GiaSanPham = $row['GiaSanPham'];
+						$TenTacGia = $row['TenTacGia'];
+						$SoLuong = $p->num;
+						$SoLuongTon = $row["SoLuongTon"];
+						include("templates/tmpGioHang.php");
+						$TongTien += $p->num * $GiaSanPham;
+					}
+				}
+               
+            }
 	?>
-	<form action="libs/handling/updatecart.php" method="get" name="frmCartItem">
-		<tr>
-			<td width="20%">
-				<input type="hidden" name="productid" value="<?php echo $product['id']; ?>">
-				<?php include("modules/displayproducts.tpl.php"); ?>
-			</td>
-			<td><input type="text" class="form-control wA" name="quantity" id="quantity" value="<?php echo $quantity; ?>"></td>
-			<td><button type="submit" name="action" value="update" class="btn btn-success">Cập nhật</button></td>
-			<td><button type="submit" name="action" value="delete" class="btn btn-info">Hủy</button></td>
-		</tr>
-	</form>
-	<?php
-		}
-	?>
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td>
+		Tổng Tiền:
+			<?php 
+					echo "<b>".number_format($TongTien) ." VNĐ </b>";
+					 $_SESSION["TongTien"] = $TongTien; 
+			?>
+		</td>
+	</tr>
 </table>
+		<?php } else { Provider::ChangeURL("index.php?a=0&id=7"); }?>
+
