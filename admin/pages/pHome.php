@@ -1,0 +1,3 @@
+<?php
+    changeTitle('Trang Chủ');
+ ?>

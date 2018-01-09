@@ -23,7 +23,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title></title>
-    <?php     include_once("./modules/mHeader.php"); ?>
+    <?php include("modules/mHeader.php") ?>
 </head>
 
 <body>
