@@ -3,7 +3,6 @@
 		var $id;
 		var $num;
 	}
-	
 	class ShoppingCart{
 		var $listProduct;
 		public function __construct(){
@@ -17,7 +16,7 @@
 				}
 			}
 		}
-		public function deleteAll($id){
+		public function deleteAll(){
 			$this->listProduct = null;
 		}
 		public function delete($id){
@@ -42,22 +41,24 @@
 				//nếu đã có rồi thì chỉ cần cập nhật số lượng lên 1
 				//nếu chưa có thì thềm mới sản phẩm đó vào giỏ hàng
 				
-				for($i = 0; $i < count($this->listProduct); $i++){
+				for($i = 0; $i < count($this->listProduct); $i++)
+				{
 					if($this->listProduct[$i]->id == $id)
 						break;
 				}
 				
-				if($i == count($this->listProduct)){
+				if($i == count($this->listProduct))
+				{
 					//Có nghĩa là đã duyệt hết giỏ hàng mà ko có sản phẩm cần thềm vào
 					//Thêm sản phẩm mới vào giỏ hàng.	
 					$p = new Product();
 					$p->id = $id;
-					$p->num = 1;
+					$p->num = $num;
 					
 					$this->listProduct[] = $p;
 				}
 				else{
-					$this->listProduct[$i]->num++;
+					$this->listProduct[$i]->num = $num;
 				} 
 			}
 		}
