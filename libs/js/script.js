@@ -13,3 +13,30 @@ function KiemTraDangNhap() {
     }
     return true;
 }
+function KiemTraCapNhat(SoLuongTon) {
+    var SLNhap = document.getElementById("txtSoLuong").value;
+
+    if (isNaN(SLNhap)) {
+        alert("Vui lòng nhập số lượng chính xác");
+        return false;
+    }
+    if (SLNhap > SoLuongTon) {
+        alert("Sách này không đủ số lượng để đặt hàng");
+        return false;
+    }
+    return true;
+}
+
+function KiemTraSoLuongSach(SoLuongTon)
+ {
+    var SoLuongNhap = document.getElementById("txtSoLuongNhap");
+    if (SoLuongNhap.value == "" || isNaN(SoLuongNhap.value) || SoLuongNhap.value == 0)
+        SoLuongNhap.value = 1
+    if (SoLuongNhap.value > SoLuongTon) {
+        alert("Sách này không đủ số lượng để đặt hàng");
+        return false;
+    }
+
+    return true;
+
+}
