@@ -23,6 +23,9 @@
         case 8:
             include ("pages/pDangKiTaiKhoan.php");
             break;
+        case 9:
+        include ("libs/XuLy/XoaTatCa.php");
+            break;
         case 10:
             include ("libs/XuLy/DangNhap.php");
             break;
@@ -30,10 +33,13 @@
             include ("libs/XuLy/DangXuat.php");
             break;
         case 12:
-            include ("pages/exThemSanPhamVaoGioHang.php");
+            include ("libs/XuLy/ThemSanPhamVaoGioHang.php");
             break;
         case 13:
-            include ("pages/exCapNhatGioHang.php");
+            include ("libs/XuLy/CapNhatGioHang.php");
+            break;
+        case 14:
+            include ("libs/XuLy/DatHang.php");
             break;
         case 15:
             include ("libs/XuLy/DangKiTaiKhoan.php");
